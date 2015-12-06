@@ -12,7 +12,7 @@ import apukhtin.courses.task1.TextUtils;
 
 public class TextUtilsTest {
 
-	private TextUtilsTest textUtils = new TextUtilsTest();
+	private TextUtils textUtils = new TextUtils();
 
 	@Test
 	public void testCorrectText() {
