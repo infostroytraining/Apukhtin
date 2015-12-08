@@ -15,7 +15,9 @@ import java.util.stream.Collectors;
 
 public class TextAnalizer {
 
-	public static Map<String, Integer> frequency(String text) {		
+	public static Map<String, Integer> frequency(String text) {	
+		if(text == null) return new HashMap<>();		
+		
 		Map<String, Integer> words = new HashMap<>();
 		HashMap<String, Integer> result = new HashMap<>();
 		
@@ -46,6 +48,8 @@ public class TextAnalizer {
 	}
 
 	public static Map<String, Integer> length(String text) {
+		if(text == null) return new HashMap<>();
+		
 		Comparator<String> comparator = (s1, s2) -> Integer.compare(s2.length(), s1.length());
 		
 		Map<String, Integer> words = new TreeMap<>(comparator);
@@ -72,6 +76,8 @@ public class TextAnalizer {
 	}
 	
 	public static List<String> duplicates(String text) {
+		if(text == null) return new ArrayList<String>();
+		
 		List<String> words = new ArrayList<>();
 		StringTokenizer tokenizer = new StringTokenizer(text, "?!. ,;:\n\t\f");
 		List<String> result = new ArrayList<>(3);
@@ -89,8 +95,10 @@ public class TextAnalizer {
 		for(String word : words) {
 			if(++resultCount > 3) break;
 			
-			result.add(word);
+			result.add(new StringBuilder(word).reverse().toString().toUpperCase());
 		}
+		
+		Collections.sort(result, (el1, el2) -> Integer.compare(el1.length(), el2.length()));
 		return result;
 	}
 }
