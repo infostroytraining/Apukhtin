@@ -9,8 +9,16 @@ import java.util.Set;
 public class AnalizerController {
 	private static File file;
 	private static String text;
+	private final static String HELP_TEXT = "HELP:\nUse only utf8 decoded files\n"
+			+ "--Here must be help.--";
 	
 	public static void process(ArgsAnalizer analizer) throws IOException {
+		if(analizer == null) throw new IllegalArgumentException("Analizer arg is null");
+		if(analizer.showHelp) {
+			System.out.println(HELP_TEXT);
+			return;
+		}
+		
 		file = analizer.input;
 		text = AnalizerUtils.loadTextFromFile(file).toLowerCase();
 		
