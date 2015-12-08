@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 
 
@@ -73,33 +74,23 @@ public class TextAnalizer {
 	public static List<String> duplicates(String text) {
 		List<String> words = new ArrayList<>();
 		StringTokenizer tokenizer = new StringTokenizer(text, "?!. ,;:\n\t\f");
-		List<String> result = new ArrayList(3);
+		List<String> result = new ArrayList<>(3);
 		
 		while(tokenizer.hasMoreTokens()) {
 			words.add(tokenizer.nextToken());
 		}
 		
-		int duplicatesCount = 0;
-		for(int i = 0; i < words.size(); i++) {
-			for(int j = 0; j < words.size(); j++) {
-				if(words.get(i).equals(words.get(j)) && !result.contains(words.get(j))) {
-					String word = words.get(j);
-					
-					StringBuilder builder = new StringBuilder();
-					
-					// reverse word
-					for(int k = word.length() - 1; k >= 0; k--) {
-						builder.append(String.valueOf(word.charAt(k)));
-					}
-					// add word to result list
-					result.add(builder.toString());
-					if(++duplicatesCount >= 3) {
-						return result;
-					}
-				}
-			}
-		}
+		List<String> distinctWords = words.stream().distinct().collect(Collectors.toList());
 		
+		// keep only duplicates in words
+		distinctWords.forEach( w -> words.remove(w));
+		
+		int resultCount = 0;
+		for(String word : words) {
+			if(++resultCount > 3) break;
+			
+			result.add(word);
+		}
 		return result;
 	}
 }

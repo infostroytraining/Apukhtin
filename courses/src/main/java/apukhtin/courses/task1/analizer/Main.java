@@ -9,8 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		ArgsAnalizer argsAnalizer = new ArgsAnalizer();
 		
-		String[] arg = new String[] {"-i",  "C:\\Users\\vlad\\Desktop\\1.txt",  "-t", "length"};
-		new JCommander(argsAnalizer, arg);
+		new JCommander(argsAnalizer, args);
 		
 		try {
 			AnalizerController.process(argsAnalizer);
