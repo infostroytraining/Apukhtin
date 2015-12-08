@@ -11,8 +11,9 @@ public class TriangleUtils {
 	 */
 
 	public boolean isTriangle(int a, int b, int c) throws IllegalArgumentException {
-		// TODO the method body
-		return true | false;
+		if(!areValidArgs(a, b, c)) throw new IllegalArgumentException();
+		
+		return a + b > c && a + c > b && b + c > a;
 	}
 
 	/**
@@ -21,7 +22,17 @@ public class TriangleUtils {
 	 */
 
 	public double getTriangleArea(int a, int b, int c) throws IllegalArgumentException {
-		// TODO the method body
-		return 0d;
+		if(!areValidArgs(a, b, c)) throw new IllegalArgumentException();
+		
+		// Heron's formula
+		double p = (a + b + c) / 3;
+		return Math.sqrt(p * (p - a) * (p - b) * (p - c));
+	}
+	
+	private static boolean areValidArgs(int a, int b, int c) {
+		if(a < 0 || b < 0 || c < 0) return false;
+		if(a == b && b == c && c == 0) return false;
+		
+		return true;
 	}
 }
