@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class AnalizerUtils {
 	public static String loadTextFromFile(File f) throws IOException {
+		if(f == null) throw new IOException("File has not been set");
 		String result = "";
 		
 		List<String> strings = Files.lines(f.toPath()).collect(Collectors.toList());
