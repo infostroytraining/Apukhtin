@@ -89,4 +89,9 @@ public class InMemoryUserDaoImpl implements UserDAO {
     public boolean emailExists(String email) {
         return userDB.getUsers().stream().anyMatch(u -> u.getEmail().equals(email));
     }
+
+    @Override
+    public List<User> getAll() {
+        return userDB.getUsers();
+    }
 }

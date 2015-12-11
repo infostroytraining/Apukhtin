@@ -13,9 +13,21 @@ class UserContainer {
     private LinkedList<User> users = new LinkedList<>();
 
     {
-        users.add(new User("Vlad Apukhtin", "123", "pandalmail@gmail.com"));
-        users.add(new User("Gena Ivanov", "123", "gena@gmail.com"));
-        users.add(new User("Sasha Grinenko", "321", "sasha@gmail.com"));
+        users.add(new User("Vlad Apukhtin", "123", "pandalmail@gmail.com") {
+            {
+                setId(1);
+            }
+        });
+        users.add(new User("Gena Ivanov", "123", "gena@gmail.com") {
+            {
+                setId(2);
+            }
+        });
+        users.add(new User("Sasha Grinenko", "321", "sasha@gmail.com") {
+            {
+                setId(3);
+            }
+        });
     }
 
     private UserContainer() {
