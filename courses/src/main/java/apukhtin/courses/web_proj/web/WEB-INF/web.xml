@@ -7,9 +7,18 @@
         <servlet-name>Register</servlet-name>
         <servlet-class>servlets.Register</servlet-class>
     </servlet>
-    
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>UserViewFilter</filter-name>
+        <filter-class>filters.UsersViewFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserViewFilter</filter-name>
+        <url-pattern>/users.jsp</url-pattern>
+    </filter-mapping>
+
 </web-app>

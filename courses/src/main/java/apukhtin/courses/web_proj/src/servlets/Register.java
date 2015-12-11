@@ -21,6 +21,9 @@ public class Register extends javax.servlet.http.HttpServlet {
             request.getRequestDispatcher("register.jsp").forward(request, response);
             return;
         }
+
+        request.setAttribute("msg", "User has been added");
+        request.getRequestDispatcher("users.jsp").forward(request, response);
     }
 
     private User getUserFromRequest(HttpServletRequest request) {
