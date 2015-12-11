@@ -1,0 +1,35 @@
+package servlets;
+
+import model.User;
+import services.UserService;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class Register extends javax.servlet.http.HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        User u = getUserFromRequest(request);
+        UserService userService = new UserService();
+        try {
+            userService.addUser(u);
+        } catch (IllegalArgumentException e) {
+            request.setAttribute("error", e.getMessage());
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+    }
+
+    private User getUserFromRequest(HttpServletRequest request) {
+        String email = request.getParameter("email");
+        String name = request.getParameter("name");
+        String password = request.getParameter("password");
+
+        User u = new User(name, password, email);
+
+        return u;
+    }
+}

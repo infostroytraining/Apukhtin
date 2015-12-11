@@ -12,7 +12,7 @@ public class UserService {
         boolean isError = false;
         String descr = "";
 
-        if (user.getEmail() == null) {
+        if (user.getEmail() == null || user.getEmail().isEmpty()) {
             isError = true;
             descr = "No email given";
         }
