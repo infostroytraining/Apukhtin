@@ -14,6 +14,17 @@ public class InMemoryUserDaoImpl implements UserDAO {
             return null;
         }
 
+        // search user index
+        if (obj.getId() == 0) {
+            int index = userDB.getUsers().size();
+
+            // if index of length
+            while (contains(index)) {
+                index++;
+            }
+            obj.setId(index);
+        }
+
         userDB.getUsers().add(obj);
 
         return obj;
@@ -72,5 +83,10 @@ public class InMemoryUserDaoImpl implements UserDAO {
         }
 
         return false;
+    }
+
+    @Override
+    public boolean emailExists(String email) {
+        return userDB.getUsers().stream().anyMatch(u -> u.getEmail().equals(email));
     }
 }
