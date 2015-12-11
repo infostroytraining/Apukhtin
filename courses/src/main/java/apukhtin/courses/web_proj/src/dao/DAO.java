@@ -7,5 +7,7 @@ public interface DAO<T> {
 
     T get(long id);
 
-    void update(long id);
+    void update(T obj);
+
+    boolean contains(long id);
 }
