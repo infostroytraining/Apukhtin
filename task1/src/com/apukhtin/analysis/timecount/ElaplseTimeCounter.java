@@ -1,6 +1,4 @@
-package apukhtin.courses.task1.analizer;
-
-import java.util.concurrent.TimeUnit;
+package com.apukhtin.analysis.timecount;
 
 public class ElaplseTimeCounter {
 	private static long startCountingTime;

@@ -1,9 +1,8 @@
-package apukhtin.courses.task1.analizer;
+package com.apukhtin.analysis.analizer;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -1,11 +1,11 @@
-package apukhtin.courses.task1.analizer;
+package com.apukhtin.analysis.analizer.converter;
 
 import com.beust.jcommander.IStringConverter;
 
-import apukhtin.courses.task1.analizer.command.Command;
-import apukhtin.courses.task1.analizer.command.DuplicatesCommand;
-import apukhtin.courses.task1.analizer.command.FrequencyCommand;
-import apukhtin.courses.task1.analizer.command.LengthCommand;
+import com.apukhtin.analysis.command.Command;
+import com.apukhtin.analysis.command.DuplicatesCommand;
+import com.apukhtin.analysis.command.FrequencyCommand;
+import com.apukhtin.analysis.command.LengthCommand;
 
 public class CommandConverter implements IStringConverter<Command> {
 	@Override

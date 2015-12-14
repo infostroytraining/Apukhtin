@@ -1,4 +1,4 @@
-package apukhtin.courses.task1.analizer.command;
+package com.apukhtin.analysis.command;
 
 import java.util.List;
 

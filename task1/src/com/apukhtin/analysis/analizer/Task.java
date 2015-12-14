@@ -1,4 +1,4 @@
-package apukhtin.courses.task1.analizer;
+package com.apukhtin.analysis.analizer;
 
 public enum Task {
 	 FREQUENCY, LENGTH, DUPLICATES

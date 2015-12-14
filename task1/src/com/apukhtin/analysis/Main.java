@@ -1,7 +1,9 @@
-package apukhtin.courses.task1.analizer;
+package com.apukhtin.analysis;
 
 import java.io.IOException;
 
+import com.apukhtin.analysis.analizer.AnalizerController;
+import com.apukhtin.analysis.analizer.ArgsAnalizer;
 import com.beust.jcommander.JCommander;
 
 public class Main {

@@ -1,10 +1,12 @@
-package apukhtin.courses.task1.analizer;
+package com.apukhtin.analysis.analizer;
 
 import java.io.File;
 
+import com.apukhtin.analysis.analizer.converter.CommandConverter;
+import com.apukhtin.analysis.analizer.converter.FileConverter;
 import com.beust.jcommander.Parameter;
 
-import apukhtin.courses.task1.analizer.command.Command;
+import com.apukhtin.analysis.command.Command;
 
 public class ArgsAnalizer {
 	@Parameter(names = {"-i", "--input"}, converter = FileConverter.class)

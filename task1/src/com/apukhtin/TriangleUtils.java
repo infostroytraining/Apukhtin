@@ -1,4 +1,4 @@
-package apukhtin.courses.task1;
+package com.apukhtin;
 
 public class TriangleUtils {
 

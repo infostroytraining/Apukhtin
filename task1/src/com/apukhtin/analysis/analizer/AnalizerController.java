@@ -1,8 +1,9 @@
-package apukhtin.courses.task1.analizer;
+package com.apukhtin.analysis.analizer;
+
+import com.apukhtin.analysis.command.Command;
+
 import java.io.File;
 import java.io.IOException;
-
-import apukhtin.courses.task1.analizer.command.Command;
 
 public class AnalizerController {
 	private static File file;

@@ -1,4 +1,4 @@
-package apukhtin.courses.task1.analizer;
+package com.apukhtin.analysis.calculations;
 
 import java.util.ArrayList;
 import java.util.Collections;
