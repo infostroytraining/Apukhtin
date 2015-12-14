@@ -1,7 +1,7 @@
 package services;
 
-import dao.InMemoryUserDaoImpl;
 import dao.UserDAO;
+import dao.memory.InMemoryUserDaoImpl;
 import model.User;
 
 public class UserService {

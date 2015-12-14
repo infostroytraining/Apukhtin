@@ -1,4 +1,4 @@
-package dao;
+package dao.memory;
 
 import model.User;
 

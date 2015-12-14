@@ -1,6 +1,6 @@
 package filters;
 
-import dao.InMemoryUserDaoImpl;
+import dao.memory.InMemoryUserDaoImpl;
 
 import javax.servlet.*;
 import java.io.IOException;
