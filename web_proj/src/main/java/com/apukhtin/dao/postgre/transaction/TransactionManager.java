@@ -19,6 +19,7 @@ public class TransactionManager {
             connection = ConnectionEstablisher.getConnection();
             connection.setAutoCommit(false);
             result = transaction.execute(connection);
+            connection.commit();
         } catch (SQLException e) {
             throw e;
         } finally {

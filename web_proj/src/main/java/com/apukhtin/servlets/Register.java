@@ -1,6 +1,7 @@
 package com.apukhtin.servlets;
 
 import com.apukhtin.model.User;
+import com.apukhtin.services.ServiceException;
 import com.apukhtin.services.UserService;
 
 import javax.servlet.ServletException;
@@ -16,7 +17,7 @@ public class Register extends javax.servlet.http.HttpServlet {
         UserService userService = new UserService();
         try {
             userService.addUser(u);
-        } catch (IllegalArgumentException e) {
+        } catch (ServiceException e) {
             request.setAttribute("error", e.getMessage());
             request.getRequestDispatcher("register.jsp").forward(request, response);
             return;

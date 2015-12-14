@@ -40,10 +40,10 @@ public class UserService {
             if (dao.emailExists(user.getEmail())) {
                 throw new ServiceException("User with such email exists");
             }
+            dao.add(user);
         } catch (DAOException e) {
             throw new ServiceException(e);
         }
 
-        dao.add(user);
     }
 }
