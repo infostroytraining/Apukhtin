@@ -1,5 +1,6 @@
 package com.apukhtin.services;
 
+import com.apukhtin.dao.DAOException;
 import com.apukhtin.dao.UserDAO;
 import com.apukhtin.dao.memory.InMemoryUserDaoImpl;
 import com.apukhtin.model.User;
@@ -32,11 +33,15 @@ public class UserService {
         }
     }
 
-    public void addUser(User user) throws IllegalArgumentException {
+    public void addUser(User user) throws ServiceException {
         validateForNulls(user);
 
-        if (dao.emailExists(user.getEmail())) {
-            throw new IllegalArgumentException("User with such email exists");
+        try {
+            if (dao.emailExists(user.getEmail())) {
+                throw new ServiceException("User with such email exists");
+            }
+        } catch (DAOException e) {
+            throw new ServiceException(e);
         }
 
         dao.add(user);

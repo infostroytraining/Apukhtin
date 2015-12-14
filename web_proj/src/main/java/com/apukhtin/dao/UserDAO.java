@@ -6,7 +6,7 @@ import java.util.List;
 
 
 public interface UserDAO extends DAO<User> {
-    boolean emailExists(String email);
+    boolean emailExists(String email) throws DAOException;
 
-    List<User> getAll();
+    List<User> getAll() throws DAOException;
 }
