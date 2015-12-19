@@ -12,9 +12,13 @@ public class UserService {
 
     private static Logger logger = LogManager.getLogger();
 
+    //инициализируй ДАО в листенере через конструктор. Сервис не должен быть ответсвенным за создание своих зависимостей!!
     private UserDAO dao = new InMemoryUserDaoImpl();
 
-    public static void validateForNulls(User user) throws ServiceException {
+   // Этот метод выглядит немного нелогичным.  Во первых, при твоей логике избыточна переменная isError. Так как можно проверить 
+   //descr.isEmpty() и этого будет достаточно. Во вторых, у тебя всегда учитывается только одна ошибка. А если их будет несколько? 
+   //Почему бы не использовать подход со списком(картой) ошибок?
+    /ublic static void validateForNulls(User user) throws ServiceException {
         logger.entry(user);
         boolean isError = false;
         String descr = "";
