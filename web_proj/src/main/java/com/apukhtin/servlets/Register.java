@@ -14,8 +14,8 @@ public class Register extends javax.servlet.http.HttpServlet {
             throws ServletException, IOException {
 
         User u = getUserFromRequest(request);
-        UserService userService = new UserService();
         try {
+            UserService userService = ((UserService) request.getServletContext().getAttribute("userService"));
             userService.addUser(u);
         } catch (ServiceException e) {
             request.setAttribute("error", e.getMessage());
