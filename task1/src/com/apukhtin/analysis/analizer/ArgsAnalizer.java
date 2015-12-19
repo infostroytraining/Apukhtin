@@ -1,12 +1,11 @@
 package com.apukhtin.analysis.analizer;
 
-import java.io.File;
-
 import com.apukhtin.analysis.analizer.converter.CommandConverter;
 import com.apukhtin.analysis.analizer.converter.FileConverter;
+import com.apukhtin.analysis.command.Command;
 import com.beust.jcommander.Parameter;
 
-import com.apukhtin.analysis.command.Command;
+import java.io.File;
 
 public class ArgsAnalizer {
 	@Parameter(names = {"-i", "--input"}, converter = FileConverter.class)
@@ -17,6 +16,13 @@ public class ArgsAnalizer {
 	
 	@Parameter(names = "--help")
 	private boolean showHelp;
+
+	@Parameter(names = "--parallel")
+	private boolean inParallel;
+
+	public boolean isInParallel() {
+		return inParallel;
+	}
 
 	public File getInput() {
 		return input;

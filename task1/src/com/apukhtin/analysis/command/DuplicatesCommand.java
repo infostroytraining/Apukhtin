@@ -1,21 +1,15 @@
 package com.apukhtin.analysis.command;
 
-import java.util.List;
+import com.apukhtin.analysis.calculations.TextAnalizer;
 
-import apukhtin.courses.task1.analizer.ElaplseTimeCounter;
-import apukhtin.courses.task1.analizer.TextAnalizer;
+import java.util.List;
 
 public class DuplicatesCommand implements Command {
 
 	@Override
-	public void execute(String text) {
-		ElaplseTimeCounter.start();
-		
-		List<String> res = TextAnalizer.duplicates(text);
-		res.forEach( el -> System.out.println(el) );
-		
-		ElaplseTimeCounter.end();
-		
+	public void execute(String text, boolean inParallel) {
+		List<String> res = TextAnalizer.duplicates(text, inParallel);
+		res.forEach(el -> System.out.println(el));
 	}
 
 }

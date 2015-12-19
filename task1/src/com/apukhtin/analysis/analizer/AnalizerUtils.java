@@ -14,7 +14,7 @@ public class AnalizerUtils {
 		List<String> strings = Files.lines(f.toPath()).collect(Collectors.toList());
 		
 		for(String s : strings) {
-			result += s;
+			result += s + " ";
 		}
 		
 		return result;

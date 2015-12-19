@@ -1,41 +1,35 @@
 package com.apukhtin.analysis.calculations;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
-
+import java.util.stream.Stream;
 
 
 public class TextAnalizer {
 
-	public static Map<String, Integer> frequency(String text) {	
-		if(text == null) return new HashMap<>();		
-		
+	public static Map<String, Integer> frequency(String text, boolean doInParallel) {
+		if(text == null) return new HashMap<>();
+
+		// map of words and their frequency
 		Map<String, Integer> words = new HashMap<>();
+		//result containing only 2 entries
 		HashMap<String, Integer> result = new HashMap<>();
 		
 		StringTokenizer tokenizer = new StringTokenizer(text, "?!. ,;:\n\t\f");
 		
 		while(tokenizer.hasMoreTokens()) {
 			String token = tokenizer.nextToken();
-			
-			if(words.containsKey(token)) { 
-				words.replace(token, words.get(token) + 1);
-			} else {
-				words.put(token, 1);
-			}
+
+			words.computeIfPresent(token, (s, integer) -> integer + 1);
+			words.computeIfAbsent(token, s -> 1);
 		}
 		
 		for(int i = 0; i < 2; i++ ) {
-			Entry<String, Integer> entryWithMaxVal = words.entrySet()
-					.stream()
+			Stream<Entry<String, Integer>> stream = doInParallel ? words.entrySet().parallelStream()
+					: words.entrySet().stream();
+
+			Entry<String, Integer> entryWithMaxVal = stream
 					.max((e1, e2) -> e1.getValue().compareTo(e2.getValue()))
 					.get();
 			
@@ -47,7 +41,7 @@ public class TextAnalizer {
 		return result;
 	}
 
-	public static Map<String, Integer> length(String text) {
+	public static Map<String, Integer> length(String text, boolean doInParallel) {
 		if(text == null) return new HashMap<>();
 		
 		Comparator<String> comparator = (s1, s2) -> Integer.compare(s2.length(), s1.length());
@@ -57,25 +51,22 @@ public class TextAnalizer {
 
 		while(tokenizer.hasMoreTokens()) {
 			String token = tokenizer.nextToken();
-			
-			if(!words.containsKey(token)) { 
-				words.put(token, token.length());
-			}
+
+			words.computeIfAbsent(token, s -> token.length());
 		}
-		
-		Map<String, Integer> result = new TreeMap<>(comparator);
-		
-		int i = 0;
-				
-		for(Entry<String, Integer> entry : words.entrySet()) {
-			if(++i > 3) break;
-			
-			result.put(entry.getKey(), entry.getValue());
-		}
-		return result;
+
+		Stream<Map.Entry<String, Integer>> stream = doInParallel ? words.entrySet().parallelStream()
+				: words.entrySet().stream();
+
+		words = stream
+				.limit(3)
+				.collect(Collectors.toMap((Map.Entry<String, Integer> entry) -> entry.getKey(),
+						(Map.Entry<String, Integer> entry) -> entry.getValue()));
+
+		return words;
 	}
-	
-	public static List<String> duplicates(String text) {
+
+	public static List<String> duplicates(String text, boolean doInParallel) {
 		if(text == null) return new ArrayList<String>();
 		
 		List<String> words = new ArrayList<>();
@@ -85,8 +76,12 @@ public class TextAnalizer {
 		while(tokenizer.hasMoreTokens()) {
 			words.add(tokenizer.nextToken());
 		}
-		
-		List<String> distinctWords = words.stream().distinct().collect(Collectors.toList());
+
+		Stream<String> stream = doInParallel ? words.parallelStream() : words.stream();
+
+		List<String> distinctWords = stream
+				.distinct()
+				.collect(Collectors.toList());
 		
 		// keep only duplicates in words
 		distinctWords.forEach( w -> words.remove(w));
