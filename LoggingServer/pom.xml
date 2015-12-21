@@ -48,7 +48,7 @@
                 <version>2.6</version>
                 <configuration>
                     <warName>ROOT</warName>
-                    <warSourceDirectory>src</warSourceDirectory>
+                    <warSourceDirectory>web</warSourceDirectory>
                     <webXml>web/WEB-INF/web.xml</webXml>
                     <webappDirectory>web/</webappDirectory>
                 </configuration>
