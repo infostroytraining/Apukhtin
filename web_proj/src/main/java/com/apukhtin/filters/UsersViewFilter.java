@@ -2,6 +2,7 @@ package com.apukhtin.filters;
 
 import com.apukhtin.dao.memory.InMemoryUserDaoImpl;
 import com.apukhtin.model.User;
+import com.apukhtin.services.ServiceException;
 import com.apukhtin.services.UserService;
 
 import javax.servlet.*;
@@ -16,7 +17,11 @@ public class UsersViewFilter implements Filter {
             throws ServletException, IOException {
 
         UserService userService = ((UserService) req.getServletContext().getAttribute("userService"));
-        req.getServletContext().setAttribute("users", userService);
+        try {
+            req.getServletContext().setAttribute("users", userService.getUsers());
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
         chain.doFilter(req, resp);
     }
 

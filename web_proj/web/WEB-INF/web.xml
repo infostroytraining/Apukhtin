@@ -21,4 +21,8 @@
         <url-pattern>/users.jsp</url-pattern>
     </filter-mapping>
 
+    <welcome-file-list>
+        <welcome-file>register.jsp</welcome-file>
+    </welcome-file-list>
+
 </web-app>
