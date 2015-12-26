@@ -2,13 +2,13 @@ package com.apukhtin.services;
 
 import com.apukhtin.dao.DAOException;
 import com.apukhtin.dao.UserDAO;
-import com.apukhtin.dao.memory.InMemoryUserDaoImpl;
 import com.apukhtin.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserService {
 
@@ -20,31 +20,29 @@ public class UserService {
         this.dao = dao;
     }
 
-    public static void validateForNulls(User user) throws ServiceException {
+    public static Map<String, String> validateUserValues(User user) throws ServiceException {
         logger.entry(user);
-        String descr = "";
+        Map<String, String> result = new HashMap<>();
 
         if (user.getEmail() == null || user.getEmail().isEmpty()) {
-            descr += "No email given";
+            result.put("email", "No email given");
         }
 
         if (user.getPassword() == null || user.getPassword().isEmpty()) {
-            descr += "No pass given";
+            result.put("password", "No password given");
         }
 
         if (user.getName() == null || user.getName().isEmpty()) {
-            descr += "No name given";
+            result.put("name", "No name given");
         }
 
-        if (descr.isEmpty()) {
-            logger.debug("Not validated. " + descr);
-            throw new ServiceException(descr);
-        }
+        return result;
     }
 
     public void addUser(User user) throws ServiceException {
         logger.entry(user);
-        validateForNulls(user);
+        Map<String, String> errors = validateUserValues(user);
+        if(!errors.isEmpty()) throw new ServiceException(errors.toString());
 
         try {
             if (dao.emailExists(user.getEmail())) {
