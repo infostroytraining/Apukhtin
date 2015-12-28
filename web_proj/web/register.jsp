@@ -23,9 +23,10 @@
 <body>
 <div class="container">
     <div class="row">
+        <div id="errDiv" class="alert alert-danger" hidden="hidden">
+            <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+        </div>
         <div class="col-md-12">
-            <p class="bg-danger" hidden="hidden"></p>
-
             <form id="registerForm" class="form-inline" action="/register" method="post">
                 <div class="form-group">
                     <label for="name">Имя</label>
@@ -49,5 +50,6 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/registerHandler.js"></script>
+<script src="js/formValidator.js"></script>
 </body>
 </html>

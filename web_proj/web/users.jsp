@@ -19,26 +19,22 @@
     <![endif]-->
 </head>
 <body>
-<c:if test="${msg ne null}">
-    <div style="background-color: #b7e5ff; color: #4741e8;">
-        <h3> ${msg} </h3>
-    </div>
-</c:if>
-
-<table border="1">
-    <thead>
-    <td>ФИО</td>
-    <td>мыло</td>
-    </thead>
-    <tbody>
-    <c:forEach items="${users}" var="u">
-        <tr>
-            <td>${u.name}</td>
-            <td>${u.email}</td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
+<div class="container">
+    <table class="table table-bordered table-stripped">
+        <thead>
+        <td>ФИО</td>
+        <td>мыло</td>
+        </thead>
+        <tbody>
+        <c:forEach items="${users}" var="u">
+            <tr>
+                <td>${u.name}</td>
+                <td>${u.email}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-2.1.4.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

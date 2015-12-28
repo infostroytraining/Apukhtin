@@ -42,8 +42,6 @@ public class Register extends javax.servlet.http.HttpServlet {
                 userService.addUser(u);
 
                 logger.debug("Forwarding to users.jsp");
-                request.setAttribute("msg", "User has been added");
-                request.getRequestDispatcher("users.jsp").forward(request, response);
             } else {
                 logger.warn("Validation has not been passed. Errors: ", possibleErrors.toString());
                 appendErr(response, gson.toJson(possibleErrors, MAP_TYPE));
@@ -53,7 +51,7 @@ public class Register extends javax.servlet.http.HttpServlet {
             logger.catching(e);
             JsonObject errJson = new JsonObject();
             errJson.addProperty("initErr", e.getMessage());
-            appendErr(response, errJson.getAsString());
+            appendErr(response, gson.toJson(errJson));
         }
     }
 
