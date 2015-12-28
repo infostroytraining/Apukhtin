@@ -21,6 +21,9 @@ public class TransactionManager {
             result = transaction.execute(connection);
             connection.commit();
         } catch (SQLException e) {
+            if (connection != null) {
+                connection.rollback();
+            }
             throw e;
         } finally {
             if (connection != null) {
