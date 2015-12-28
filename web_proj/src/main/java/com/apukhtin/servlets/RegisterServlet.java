@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-public class Register extends javax.servlet.http.HttpServlet {
+public class RegisterServlet extends javax.servlet.http.HttpServlet {
 
     private Logger logger = LogManager.getLogger();
     private static Type MAP_TYPE = new TypeToken<Map<Integer, String>>() {
@@ -56,16 +56,19 @@ public class Register extends javax.servlet.http.HttpServlet {
     }
 
     private void append(HttpServletResponse response, String err) throws IOException {
+        if(response == null) return;
         response.setHeader("Content-Type", "application/json");
         response.getWriter().append(err);
     }
 
     private void appendSuccess(HttpServletResponse response, String err) throws IOException {
+        if(response == null) return;
         response.setStatus(200);
         append(response, err);
     }
 
     private void appendErr(HttpServletResponse response, String err) throws IOException {
+        if(response == null) return;
         response.setStatus(400);
         append(response, err);
     }
