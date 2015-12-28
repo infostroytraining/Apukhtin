@@ -19,7 +19,7 @@ public class ConnectionEstablisher {
 
     public static Connection getConnection() throws SQLException {
         StringConfigManager manager =
-                new StringConfigManager("jdbc:postgresql://127.0.0.1:5432/mydb", "postgres", "123456");
+                new StringConfigManager("jdbc:postgresql://127.0.0.1:5432/mydb?characterEncoding=utf8", "postgres", "123456");
 
         Connection connection = null;
         try {
