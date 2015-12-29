@@ -1,8 +1,10 @@
 package com.apukhtin.servlets;
 
+import com.apukhtin.dao.postgre.PostrgeUserDAO;
 import com.apukhtin.model.User;
 import com.apukhtin.services.ServiceException;
 import com.apukhtin.services.UserService;
+import com.apukhtin.services.UserValidator;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -30,12 +32,14 @@ public class RegisterServlet extends javax.servlet.http.HttpServlet {
         logger.debug("User input to register servlet. Got: ", u);
 
         UserService userService = ((UserService) request.getServletContext().getAttribute("userService"));
+        PostrgeUserDAO dao = (PostrgeUserDAO) request.getServletContext().getAttribute("postgreDao");
         logger.debug("Accessed to context to UserService. Got: ", userService);
+
 
         try {
             // validation
             logger.debug("Validating user");
-            Map<String, String> possibleErrors = UserService.validateUserValues(u);
+            Map<String, String> possibleErrors = UserValidator.validateUserValues(u, dao);
             if (possibleErrors.isEmpty()) { // in case it passed
                 logger.debug("No errors found. Validation complete");
 
@@ -59,12 +63,6 @@ public class RegisterServlet extends javax.servlet.http.HttpServlet {
         if(response == null) return;
         response.setHeader("Content-Type", "application/json");
         response.getWriter().append(err);
-    }
-
-    private void appendSuccess(HttpServletResponse response, String err) throws IOException {
-        if(response == null) return;
-        response.setStatus(200);
-        append(response, err);
     }
 
     private void appendErr(HttpServletResponse response, String err) throws IOException {

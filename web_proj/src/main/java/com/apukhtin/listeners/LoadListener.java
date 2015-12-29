@@ -18,6 +18,7 @@ public class LoadListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         PostrgeUserDAO daoImpl = new PostrgeUserDAO();
+        servletContextEvent.getServletContext().setAttribute("postgreDao", daoImpl);
         servletContextEvent.getServletContext().setAttribute("userService", new UserService(daoImpl));
     }
 

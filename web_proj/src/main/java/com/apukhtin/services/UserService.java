@@ -15,48 +15,15 @@ public class UserService {
 
     private static Logger logger = LogManager.getLogger();
 
-    private static UserDAO dao;
+    private UserDAO dao;
 
     public UserService(UserDAO dao) {
         this.dao = dao;
     }
 
-    public static Map<String, String> validateUserValues(User user) throws ServiceException {
-        logger.debug("Start validating");
-        logger.entry(user);
-        Map<String, String> result = new HashMap<>();
-
-        if (user.getEmail() == null || user.getEmail().isEmpty()) {
-            result.put("email", "No email given");
-        }
-
-        if (user.getPassword() == null || user.getPassword().isEmpty()) {
-            result.put("password", "No password given");
-        }
-
-        if (user.getName() == null || user.getName().isEmpty()) {
-            result.put("name", "No name given");
-        }
-
-        result.putAll(validateForExistingEmail(user));
-        return result;
-    }
-
-    public static Map<String, String> validateForExistingEmail(User user) throws ServiceException {
-        Map<String, String> errMap = new HashMap<>();
-        try {
-            if (dao.emailExists(user.getEmail())) {
-                errMap.put("email", "User with such email already exists");
-            }
-        } catch (DAOException e) {
-            throw new ServiceException(e);
-        }
-        return errMap;
-    }
-
     public void addUser(User user) throws ServiceException {
         logger.entry(user);
-        Map<String, String> errors = validateUserValues(user);
+        Map<String, String> errors = UserValidator.validateUserValues(user, dao);
         if (!errors.isEmpty()) {
             String errorMsg = errors.entrySet()
                     .stream()
