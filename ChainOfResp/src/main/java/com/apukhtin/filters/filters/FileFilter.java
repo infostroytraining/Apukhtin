@@ -1,4 +1,4 @@
-package com.apukhtin.filters;
+package com.apukhtin.filters.filters;
 
 import java.io.File;
 
@@ -6,9 +6,10 @@ import java.io.File;
  * Created by Vladyslav Apukhtin on 26.12.2015.
  * Enjoy.
  */
-abstract public class FileFilter<T> {
+abstract public class FileFilter {
 
     private FileFilter next;
+    private boolean isFilterEnabled = true;
 
     public FileFilter(FileFilter next) {
         this.next = next;
@@ -23,4 +24,11 @@ abstract public class FileFilter<T> {
 
     abstract public boolean checkCurrentFile(File file);
 
+    public boolean isFilterEnabled() {
+        return isFilterEnabled;
+    }
+
+    public void setFilterEnabled(boolean isFilterEnabled) {
+        this.isFilterEnabled = isFilterEnabled;
+    }
 }
